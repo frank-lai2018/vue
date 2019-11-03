@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="n1">
+        <select name="" id="" v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="n2">
+        <input type="text" v-model="result">
+        <input type="button" value="計算" v-on:click="calculation">
+    </div>
+</body>
+    <script src="./lib/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data() {
+                return {
+                    n1:0,    
+                    n2:0,    
+                    result:0,  
+                    opt:"+"  
+                }
+            },
+            methods: {
+                calculation(){
+                    /*switch (this.opt){
+                        case "+":
+                            this.result = parseInt(this.n1) + parseInt(this.n2);
+                            break;
+                        case "-":
+                            this.result = parseInt(this.n1) - parseInt(this.n2);
+                            break;
+                        case "*":
+                            this.result = parseInt(this.n1) * parseInt(this.n2);
+                            break;
+                        case "/":
+                            this.result = parseInt(this.n1) / parseInt(this.n2);
+                            break;
+                    }*/
+
+                    let res = "parseInt(this.n1) "+this.opt+" parseInt(this.n2)";
+                    this.result = eval(res);
+                }
+            }
+        })
+    </script>
+</html>

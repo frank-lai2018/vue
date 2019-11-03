@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Vue 中提供了 v-on: 事件綁定機制 -->
+        <input type="button" value="點擊按鈕" v-on:click="show">
+    </div>
+</body>
+    <script src="./lib/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            methods: {
+                show(){
+                    alert("HELLO");
+                }
+            },
+        })
+    </script>
+</html>

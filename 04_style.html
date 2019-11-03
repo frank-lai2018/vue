@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .red {
+      color: red;
+    }
+
+    .thin {
+      font-weight: 200;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+
+    .active {
+      letter-spacing: 0.5em;
+    }
+  </style>
+<body>
+    <div id="app">
+        <!-- 第一種使用方式，直接傳遞一個陣列，注意： 這裡的 class 需要使用 v-bind 做數據綁定 -->
+        <h1 :class=["red","thin"]>{{msg}}</h1>
+        <!-- 在陣列中使用三元表達式 -->
+        <h1 :class=["red","thin",flag?'active':'']>{{msg}}</h1>
+        <!-- 在陣列中使用 對象來代替三元表達式，提高代碼的可讀性 -->
+        <h1 :class=["red","thin",{'active':flag}]>{{msg}}</h1>
+        <!-- 在為class 使用v-bind 綁定物件的時候，對象的屬性是類名，由於對象的屬性可帶引號，也可不帶引號，所以這裡我沒寫引號； 屬性的值是一個標識符-->
+        <h1 :class="{ red: true, thin: true, italic: false, active: false }">{{msg}}</h1>
+        <h1 :class="classObj">{{msg}}</h1>
+
+        <h1 :style="styleObj1">{{msg}}</h1>
+        <h1 :style="[ styleObj1, styleObj2 ]">{{msg}}</h1>
+    </div>
+</body>
+    <script src="./lib/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data() {
+                return {
+                    msg:"大家好~~~~",
+                    flag:true,
+                    styleObj1: { color: 'red', 'font-weight': 200 },
+                    styleObj2: { 'font-style': 'italic' },
+                    classObj: { red: true, thin: true, italic: false, active: false }
+                }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</html>
