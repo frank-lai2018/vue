@@ -47,7 +47,7 @@
                 <tr v-for="(item, index) in search(searchKey)" :key="item.id">
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.createTime}}</td>
+                    <td>{{item.createTime | dateFormat}}</td>
                     <td><button type="button" class="btn btn-primary" @click="del(item.id)">刪除</button></td>
                 </tr>
             </tbody>
@@ -113,6 +113,29 @@
           })
             }
         },
+        filters:{
+            dateFormat:(date,pattern="") =>{
+                // 定義私有過濾器 過濾器有兩個 條件 【過濾器名稱 和 處理函數】
+                // 過濾器調用的時候，採用的是就近原則，如果私有過濾器和全局過濾器名稱一致了，這時候 優先調用私有過濾器
+                // 根据给定的时间字符串，得到特定的时间
+                var dt = new Date(date)
+
+                //   yyyy-mm-dd
+                var y = dt.getFullYear()
+                var m = (dt.getMonth() + 1).toString().padStart(2, '0')
+                var d = dt.getDate().toString().padStart(2, '0')
+
+                if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+                    return `${y}-${m}-${d}`
+                } else {
+                    var hh = dt.getHours().toString().padStart(2, '0')
+                    var mm = dt.getMinutes().toString().padStart(2, '0')
+                    var ss = dt.getSeconds().toString().padStart(2, '0')
+
+                    return `${y}-${m}-${d} ${hh}:${mm}:${ss} ~~~~~~~`
+                }
+            }
+        }
     })
 </script>
 </html>

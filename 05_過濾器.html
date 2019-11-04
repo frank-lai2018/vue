@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p id="app">{{msg | msgFormat}}</p>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+
+    Vue.filter("msgFormat",item => {
+        //字串的replace方法，第一個參數，除了可以寫一個字串外還可以定義一個正則表達式
+        // return item.replace("apple","banana");
+        return item.replace(/apple/g,"banana");
+    });
+
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                msg:"apple is apple"
+            }
+        },
+
+        methods: {
+            
+        },
+    })
+</script>
+</html>
