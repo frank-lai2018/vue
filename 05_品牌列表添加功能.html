@@ -14,21 +14,19 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Panel title</h3>
             </div>
-            <div class="panel-body table-inline">
+            <div class="panel-body form-inline">
                 
-                <label for="input" class="col-sm-2 control-label">Id</label>
-                <div class="col-xs-2">
-                    <input type="text" name="" id="input" class="form-control" value="" required="required" title="" v-model="vId">
-                </div>
-                <label for="input" class="col-sm-2 control-label">Name</label>
-                <div class="col-xs-2">
-                    <input type="text" name="" id="input" class="form-control" value="" required="required" title="" v-model="vName">
-                </div>
-                
-                <button type="button" class="btn btn-primary" @click="add">（首选项）Primary</button>
-                <div class="col-xs-2">
+                <label >
+                    Id<input type="text" name="" id="input" class="form-control" value="" required="required" title="" v-model="vId">
+                </label>
+                <label>Name
+                    
+                    <input type="text" name="" id="input" class="form-control" value="" required="required" title="" v-model="vName" @keyup.enter="add">
+                </label>
+                <button type="button" class="btn btn-primary" @click="add">增加</button>
+                <label >
                     <input type="text" name="" id="input" class="form-control" value="" required="required" title="" v-model="searchKey">
-                </div>
+                </label>                    
             </div>
         </div>
         
@@ -57,6 +55,10 @@
     </body>
     <script src="./lib/vue.js"></script>
 <script>
+
+    //自定義全局按鍵修飾符
+    Vue.config.keyCodes.f2 = 113;
+
     let vm =new Vue({
         el: "#app",
         data() {
