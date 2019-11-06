@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-focus>
+        <p>{{msg}}</p>
+    </div>
+
+    <div id="app2">
+        <p v-color="'red'">{{msg}}</p>
+    </div>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+    // 註冊一個全局自訂義指令 `v-focus`
+    /*Vue.directive("focus",{
+        bind(el){
+            el.focus();
+        },
+        inserted(el){
+            el.focus();
+        },
+
+    });*/
+
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                msg:"apple...."
+            }
+        },
+        //自訂義局部指令，這只存在vm這個物件裡
+        directives:{
+            focus:{
+                inserted(el){
+                     el.focus();
+                } 
+            }
+        }
+    })
+
+    let vm1 = new Vue({
+        el:"#app2",
+        data() {
+            return {
+                msg:"apple...."
+            }
+        },
+        directives:{
+            color:{
+                bind(el,binding){
+                    el.style.color=binding.value;
+                }
+            }
+        }
+    })
+</script>
+</html>
