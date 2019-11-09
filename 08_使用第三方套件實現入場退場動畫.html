@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+<link rel="stylesheet" href="./lib/animate.css">
+<body>
+    <div id="app">
+        
+        <button type="button" class="btn btn-primary" @click="flag=!flag">toggle</button>
+        <!-- <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+            <h1 v-if="flag">這是H1</h1>
+        </transition> -->
+        <transition enter-active-class=" bounceIn" leave-active-class=" bounceOut">
+            <h1 v-if="flag" class="animated">這是H1</h1>
+        </transition>
+
+    </div>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                flag:false,
+            }
+        },
+        methods: {
+            
+        },
+    })
+</script>
+</html>

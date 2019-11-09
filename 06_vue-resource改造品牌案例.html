@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+<body>
+    <div id="app1">
+        
+        
+        <div class="panel panel-primary">
+              <div class="panel-heading">
+                    <h3 class="panel-title">添加品牌</h3>
+              </div>
+              <div class="panel-body form-inline">
+                   <label>
+                       cardId:
+                       <input type="text" v-model="cardId">
+                   </label>
+                   <label>
+                       account:
+                       <input type="text" v-model="account">
+                   </label>
+                </div>
+                <div class="panel-body form-inline">
+                    <label>
+                        userName:
+                        <input type="text" v-model="userName">
+                    </label>
+                    <label>
+                        email:
+                        <input type="text" v-model="email">
+                    </label>
+              </div>
+              
+              <button type="button" class="btn btn-primary" @click="add">添加</button>
+              
+        </div>
+        
+
+        <table class="table table-bordered  table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>cardId</th>
+                    <th>userName</th>
+                    <th>email</th>
+                    <th>OPerator</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.cardId}}</td>
+                    <td>{{item.userName}}</td>
+                    <td>{{item.email}}</td>
+                    <td>
+                        <button type="button" class="btn btn-default" @click="del(item.id)">刪除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+<script src="./lib/vue-2.4.0.js"></script>
+<script src="./lib/vue-resource-1.3.4.js"></script>
+<script>
+
+    Vue.http.options.root = 'http://localhost:8080';
+
+    let vm =new Vue({
+        el: "#app1",
+        created() {
+            this.initData();
+        },
+        data() {
+            return {
+                cardId:"",
+                account:"",
+                userName:"",
+                email:"",
+                list:[]
+             }
+        },
+        methods: {
+            initData(){
+                this.$http.get("getAllUser").then(
+                    result => {
+                        result=result.body;
+                        // result=JSON.stringify(result);
+                        this.list=result;
+                        console.log(result);
+                    }
+                )
+            },
+            add(){
+                let patams={
+                    cardId:this.cardId,
+                    account:this.account,
+                    userName:this.userName,
+                    email:this.email
+                };
+                this.$http.post("insertUser",patams,{emulateJSON:true})
+                .then((result) =>{
+                    if(result.body.status === 0){
+                        this.initData();
+                    }else{
+                        alert("新增錯誤");
+                    }
+                        
+                });
+            },
+            del(id){
+                let patams={
+                    id:id,
+                };
+                this.$http.post("deleteUser/"+id,patams,{emulateJSON:true})
+                .then((result) =>{
+                    if(result.body.status === 0){
+                        this.initData();
+                    }else{
+                        alert("刪除錯誤");
+                    }
+                        
+                });
+            }
+        }
+    });
+</script>
+</html>

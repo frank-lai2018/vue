@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+<style>
+    /* v-enter 【這是一個時間點】 是進入之前，元素的起始狀態，此時還沒有開始進入 */
+    /* v-leave-to 【這是一個時間點】 是動畫離開之後，離開的終止狀態，此時，元素 動畫已經結束了 */
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateX(150px);
+    }
+
+    /* v-enter-active 【入場動畫的時間段】 */
+    /* v-leave-active 【離場動畫的時間段】 */
+    .v-enter-active,
+    .v-leave-active{
+      transition: all 1s ease;
+
+    }
+
+    .my-enter,
+    .my-leave-to {
+      opacity: 0;
+      transform: translateY(70px);
+    }
+
+    .my-enter-active,
+    .my-leave-active{
+      transition: all 0.8s ease;
+    }
+</style>
+<body>
+    <div id="app">
+        
+        <button type="button" class="btn btn-primary" @click="flag=!flag">toggle</button>
+        <transition>
+            <h1 v-if="flag">這是H1</h1>
+        </transition>
+        <hr>
+        <button type="button" class="btn btn-primary" @click="flag2=!flag2">toggle</button>
+        <transition name="my"><!--加入name之後，前最就會變成my-開頭-->
+            <h3 v-if="flag2">這是H3</h3>
+        </transition>
+    </div>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                flag:false,
+                flag2:false
+            }
+        },
+        methods: {
+            
+        },
+    })
+</script>
+</html>
