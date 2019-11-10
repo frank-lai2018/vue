@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+<body>
+    <diV id="app">
+        
+        <add-message v-on:func="getAllMessage"></add-message>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="(item, index) in list" :key="item.id">
+                <span class="badge">{{item.user}}</span>
+                {{item.content}}
+            </li>
+        </ul>
+        
+
+    </diV>
+
+    <template id="tmp1">
+        <div>
+            <div class="panel panel-primary">
+                  <div class="panel-heading">
+                        <h3 class="panel-title">添加評論</h3>
+                  </div>
+                  <div class="panel-body">
+                        <div class="form-group">
+                                <label>評論人：</label>
+                                <input type="text" class="form-control" v-model="user">
+                        </div>
+                        <div class="form-group">
+                            <label>評論內容：</label>
+                            <input type="text" class="form-control" v-model="content">
+                        </div>
+                        <div class="form-group">
+                            
+                            <button type="button" class="btn btn-large btn-block btn-primary" v-on:click="add">添加</button>
+                            
+                        </div>
+
+                  </div>
+            </div>
+            
+        </div>
+    </template>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+
+    let messageObj={
+        template:"#tmp1",
+        data() {
+            return {
+                user:"",
+                content:""
+            }
+        },
+        methods: {
+            add(){
+                let obj={id:Date.now(),user:this.user,content:this.content};
+                console.log(localStorage.getItem("message1"));
+                let message=JSON.parse(localStorage.getItem("message1") || '[]');
+                // message.push(obj);
+                message.unshift(obj);//從陣列頭開始加
+                //localStorage存字串
+                localStorage.setItem("message1",JSON.stringify(message));
+                this.user = this.content = ''
+                this.$emit('func');
+            }
+        },
+    };
+
+    Vue.component("add-message",messageObj);
+
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                list:[],
+                msg:"父件值",
+                name:""
+            }
+        },
+        created() {
+            this.getAllMessage();
+        },
+        methods: {
+            getAllMessage(){
+                let message=JSON.parse(localStorage.getItem("message1") || '[]');
+                this.list=message;
+            }
+        },
+    })
+</script>
+</html>

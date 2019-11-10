@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <a href="" v-on:click.prevent="flag=true">登入</a>
+        <a href="" v-on:click.prevent="flag=false">註冊</a>
+        <login v-if="flag"></login>
+        <register v-else="flag"></register>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <h1>{{msg}}</h1>
+        </div>
+    </template>
+    <template id="tmp2">
+        <div>
+            <h1>{{msg2}}</h1>
+        </div>
+    </template>
+</body>
+
+<script src="./lib/vue.js"></script>
+<script>
+
+    Vue.component("login",{
+        template:"#tmp1",
+        data() {
+            return {
+                msg:"登入組件"
+            }
+        },
+        methods:{}
+    });
+
+    Vue.component("register",{
+        template:"#tmp2",
+        data() {
+            return {
+                msg2:"註冊組件"
+            }
+        },
+        methods:{}
+    });
+
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                flag:true
+            }
+        },
+        methods: {
+            
+        },
+    })
+</script>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <mycom1></mycom1>
+    </div>    
+</body>
+    <script src="./lib/vue.js"></script>
+    <script>
+
+
+        // 1.1 使用 Vue.extend 來創建全局的Vue組件
+        // let com1 = Vue.extend({
+        //     template:"<h2>自定義組件方式1</h2>"// 通過 template 屬性，指定了組件要展示的HTML結構
+        // });
+        // 1.2 使用 Vue.component('組件的名稱', 創建出來的組件模闆對象)
+        // 如果使用 Vue.component 定義全局組件的時候，組件名稱使用了 駝峰命名，則在引用組件的時候，需要把 大寫的駝峰改為小寫的字母，同時，兩個單詞之前，使用 - 鏈接；
+        // 如果不使用駝峰,則直接拿名稱來使用即可;
+        // Vue.component("mycom1",com1);
+
+        Vue.component("mycom1",Vue.extend({
+            template:"<h2>自定義組件方式1</h2>"// 通過 template 屬性，指定了組件要展示的HTML結構
+        }));
+
+        let vm = new Vue({
+            el:"#app",
+            data() {
+                return {
+                    
+                }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</html>

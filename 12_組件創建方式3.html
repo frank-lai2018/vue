@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <mycom3></mycom3>
+    </div>    
+
+    <div id="app2">
+        <login></login>
+    </div>
+    <!-- 在 被控制的 #app 外面,使用 template 元素,定義組件的HTML模板結構 -->
+    <template id="temp1">
+        <div>
+            <h1>這是自定義組件3</h1>
+            <span>1244</span>
+        </div>
+    </template>
+
+    <template id="temp2">
+        <div>
+            <h1>這是私有自定義組件3</h1>
+            <span>1244</span>
+        </div>
+    </template>
+
+</body>
+    <script src="./lib/vue.js"></script>
+    <script>
+        
+        Vue.component("mycom3",{
+            template:"#temp1"
+        });
+
+        let vm = new Vue({
+            el:"#app",
+            data() {
+                return {
+                    
+                }
+            },
+            methods: {
+                
+            },
+        })
+
+        let vm2 = new Vue({
+            el:"#app2",
+            components:{
+                    login:{
+                        template:"#temp2"
+                    }
+                },
+            data() {return {} },
+            methods: {},
+        })
+    </script>
+</html>

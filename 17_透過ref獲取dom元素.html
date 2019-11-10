@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+            <login ref="childrenLogin"></login>
+            <h1 ref="parentObj">我是父元件</h1>
+            <button type="button" class="btn btn-large btn-block btn-default" v-on:click="handle">button</button>
+            
+    </div>
+</body>
+<script src="./lib/vue.js"></script>
+<script>
+
+    let login={
+        template:"<h1>我是子元件</h1>",
+        data() {
+            return {
+                msg:"子元件內容"
+            }
+        },
+        methods:{
+            func(){
+                console.log("子元件方法");
+            }
+        }
+    }
+
+    Vue.component("login",login);
+
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                
+            }
+        },
+        methods: {
+            handle(){
+                let msg=this.$refs.parentObj.innerText;
+                console.log(msg); //我是父元件
+               
+                let msg1=this.$refs.childrenLogin.msg;
+                console.log(msg1); //子元件內容
+                
+                let msg2=this.$refs.childrenLogin.func;
+                msg2(); //子元件方法
+
+            }
+        },
+    })
+</script>
+</html>

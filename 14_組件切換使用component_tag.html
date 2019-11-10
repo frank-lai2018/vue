@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    /*過度屬性*/
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateX(180px);
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 0.6s ease;
+    }
+
+</style>
+<body>
+    <div id="app">
+        <a href="" v-on:click.prevent="comName='login'">登入</a>
+        <a href="" v-on:click.prevent="comName='register'">註冊</a>
+        
+        <!-- 通過 mode 屬性,設置組件切換時候的 模式 -->
+        <transition mode="in-out">
+            <!-- Vue提供了 component ,來展示對應名稱的組件 -->
+            <!-- component 是一個佔位符, :is 屬性,可以用來指定要展示的組件的名稱 -->
+            <component :is="comName"></component>
+        </transition>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <h1>{{msg}}</h1>
+        </div>
+    </template>
+    <template id="tmp2">
+        <div>
+            <h1>{{msg2}}</h1>
+        </div>
+    </template>
+</body>
+
+<script src="./lib/vue.js"></script>
+<script>
+
+    Vue.component("login",{
+        template:"#tmp1",
+        data() {
+            return {
+                msg:"登入組件"
+            }
+        },
+        methods:{}
+    });
+
+    Vue.component("register",{
+        template:"#tmp2",
+        data() {
+            return {
+                msg2:"註冊組件"
+            }
+        },
+        methods:{}
+    });
+
+    let vm = new Vue({
+        el:"#app",
+        data() {
+            return {
+                comName:"login"
+            }
+        },
+        methods: {
+            
+        },
+    })
+</script>
+
+</html>
