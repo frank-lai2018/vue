@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+        <router-link to="/login?id=221&name=apple">login</router-link>
+        <router-link to="/register">register</router-link>
+
+        <router-view></router-view>
+    </div>
+</body>
+<script src="./lib//vue.js"></script>
+<script src="./lib/vue-router.js"></script>
+
+<script>
+    let login={
+        template:"<h1>login----{{this.$route.query.id}}----{{this.$route.query.name}}</h1>",
+        created() {
+            this.show();
+        },
+        data() {
+            return {
+                id:this.$route.query.id,
+                name:this.$route.query.name
+            }
+        },
+        methods: {
+            show(){
+                console.log("id",this.id,"name",this.name);
+            }
+        },
+    }
+    let register={
+        template:"<h1>register</h>"
+    }
+
+    let router  = new VueRouter({
+        routes:[
+            {path:"/",redirect:"/login"},
+            {path:"/login",component:login},
+            {path:"/register",component:register}
+        ]
+    })
+
+    let vm = new Vue({
+        el:"#app",
+        router
+    })
+</script>
+</html>

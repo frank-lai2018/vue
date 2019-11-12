@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+
+html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #header {
+      background-color: orange;
+      height: 80px;
+    }
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    .container {
+      display: flex;
+      height: 600px;
+    }
+
+    #left {
+      background-color: lightgreen;
+      flex: 5;
+    }
+
+    #main {
+      background-color: lightpink;
+      flex: 5;
+    }
+
+</style>
+<body>
+    <div id="app">
+        <router-view></router-view>
+        <div class="container">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+    </div>
+</body>
+<script src="./lib/vue.js"></script>
+<script src="./lib/vue-router.js"></script>
+<script>
+    let header={
+        template:"<div id='header'>header.........</div>"
+    };
+    let leftmenu={
+        template:"<div id='leftmenu'>leftmenu.........</div>"
+    };
+    let main={
+        template:"<div id='main'>main.........</div>"
+    };
+
+    let router = new VueRouter({
+        routes:[
+            {
+                path:"/",
+                components:{
+
+                    "default":header,
+                    "left":leftmenu,
+                    "main":main
+                }
+
+            }
+        ]
+    });
+
+    let vm = new Vue({
+        el:"#app",
+        router
+    })
+
+</script>
+
+</html>
