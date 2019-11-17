@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script src="./lib/vue.js"></script>
+<script >
+
+    let login={
+        template:"<h1>login</h1>"
+    }
+
+    let vm =new Vue({
+        el:"#app",
+        data() {
+            return {
+                
+            }
+        },
+        render(createElements) {// createElements 是一個 方法，調用它，能夠把 指定的 組件模板，渲染為 html 結構
+            return createElements(login);// 注意：這裡 return 的結果，會 替換頁面中 el 指定的那個 容器
+        },
+    })
+</script>
+</html>
