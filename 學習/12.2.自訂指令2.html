@@ -41,8 +41,8 @@
 <script type="text/javascript" src="./js/vue.js"></script>
 <script type="text/javascript">
   // 註冊一個全局指令
-  // el: 指令所在的標籤對象
-  // binding: 包含指令相關數據的容器對象
+  // el: 指令所在的標籤物件
+  // binding: 包含指令相關數據的容器物件
   Vue.directive('upper-text', function (el, binding) {
     console.log(el, binding)
     el.textContent = binding.value.toUpperCase()
