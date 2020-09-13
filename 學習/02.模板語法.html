@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_模板語法</title>
+</head>
+<body>
+<!--
+1. 模板的理解:
+  動態的html頁面
+  包含了一些JS語法代碼
+    大括號表達式
+    指令(以v-開頭的自定義標籤屬性)
+2. 雙大括號表達式
+  語法: {{exp}} 或 {{{exp}}}
+  功能: 向頁面輸出數據
+  可以調用對象的方法
+3. 指令一: 強制數據綁定
+  功能: 指定變化的屬性值
+  完整寫法:
+    v-bind:xxx='yyy' //yyy會作為表達式解析執行
+  簡潔寫法:
+    :xxx='yyy'
+4. 指令二: 綁定事件監聽
+  功能: 綁定指定事件名的回調函數
+  完整寫法:
+    v-on:click='xxx'
+  簡潔寫法:
+    @click='xxx'
+-->
+
+<div id="app">
+  <h2>1. 雙大括號表達式</h2>
+  <p>{{content}}</p>
+  <p>{{content.toUpperCase()}}</p>
+
+  <h2>2. 指令一: 強制數據綁定</h2>
+  <a href="url">訪問指定站點</a><br>
+  <a v-bind:href="url">訪問指定站點2</a><br>
+  <a :href="url">訪問指定站點2</a><br>
+
+  <h2>3. 指令二: 綁定事件監聽</h2>
+  <button v-on:click="test">點我</button>
+  <button @click="test">點我</button>
+
+</div>
+
+
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#app',
+    data: {
+      content: 'NBA I Love This Game',
+      url: 'http://www.atguigu.com'
+    },
+    methods: {
+      test () {
+        alert('好啊!!!')
+      }
+    }
+  })
+</script>
+</body>
+</html>

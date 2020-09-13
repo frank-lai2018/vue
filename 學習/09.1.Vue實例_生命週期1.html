@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>09_Vue實例_生命週期</title>
+</head>
+<body>
+<!--
+1. vue對象的生命週期
+  1). 初始化顯示
+    * beforeCreate()
+    * created()
+    * beforeMount()
+    * mounted()
+  2). 更新狀態
+    * beforeUpdate()
+    * updated()
+  3). 銷毀vue實例: vm.$destory()
+    * beforeDestory()
+    * destoryed()
+2. 常用的生命週期方法
+  created()/mounted(): 發送ajax請求, 啟動定時器等異步任務
+  beforeDestory(): 做收尾工作, 如: 清除定時器
+-->
+
+<div id="test">
+  <button @click="destroyVue">destory vue</button>
+  <p v-if="isShow">尚矽谷IT教育</p>
+</div>
+
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#test',
+    data: {
+      isShow: true
+    },
+
+    mounted () {
+      // 執行異步任務
+      this.intervalId = setInterval(() => {
+        console.log('-----')
+        this.isShow = !this.isShow
+      }, 1000)
+    },
+
+    beforeDestroy() {
+      console.log('beforeDestroy()')
+      // 執行收尾的工作
+      clearInterval(this.intervalId)
+    },
+
+    methods: {
+      destroyVue () {
+        this.$destroy()
+      }
+    }
+  })
+
+
+</script>
+</body>
+</html>

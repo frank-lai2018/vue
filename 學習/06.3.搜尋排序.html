@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>06_列表渲染_過濾與排序</title>
+</head>
+<body>
+<!--
+1. 列表過濾
+2. 列表排序
+-->
+
+<div id="demo">
+
+<div class="input-group">
+  <div class="input-group-addon">搜尋</div>
+  <input type="text" class="form-control" id="exampleInputAmount" placeholder="searchName" v-model="searchKey">
+</div>
+
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>age</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(person, index) in sohwPersons" :key="index">
+        <td>{{person.name}}</td>
+        <td>{{person.age}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button @click="setOrderType(2)" class="btn btn-lg btn-primary">age升序</button>
+    <button @click="setOrderType(1)" class="btn btn-lg btn-danger">age降序</button>
+    <button @click="setOrderType(0)" class="btn btn-lg btn-warning">原本順序</button>
+  </div>
+</div>
+
+<link rel="stylesheet" href="./css/bootstrap-3.3.7.css">
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+ let vm = new Vue({
+    el:"#demo",
+    data() {
+      return {
+        persons:[
+          {name:'frank',age:25},
+          {name:'apple',age:30},
+          {name:'amy',age:12},
+          {name:'tom',age:55},
+          {name:'tina',age:13},
+          {name:'john',age:51},
+          {name:'cat',age:45},
+          {name:'tiffany',age:25}
+        ],
+        orderType:0,
+        searchKey:''
+      }
+    },
+    methods: {
+      setOrderType(key){
+        this.orderType=key;
+      }
+    },
+    computed: {
+      sohwPersons(){
+        let persons=this.persons;
+        let oldArray = [...persons]//轉換一個新陣列出來
+        let newArray=[];
+        if(this.orderType === 0){
+          newArray= persons;
+        }else if(this.orderType === 1){
+          newArray=oldArray.sort(function(value1,value2){
+            return value1.age-value2.age;
+          })
+        }else if(this.orderType === 2){
+          newArray=oldArray.sort(function(value1,value2){
+            return value2.age-value1.age;
+          })
+
+        }
+        if(this.searchKey.trim()){
+          newArray=newArray.filter(person => person.name.indexOf(this.searchKey) !== -1);
+        }
+          return newArray;
+      }
+    },
+  })
+</script>
+</body>
+</html>

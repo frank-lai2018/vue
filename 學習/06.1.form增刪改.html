@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>06_列表渲染</title>
+</head>
+<body>
+
+<!--
+1. 列表顯示
+  陣列: v-for / index
+  物件: v-for / key
+2. 列表的更新顯示
+  刪除item
+  替換item
+-->
+
+<div id="demo">
+  <h2>測試: v-for 陣列</h2>
+  
+  <button type="button" class="btn btn-sm btn-success" @click="insert">新增</button>
+
+  
+  <form action="" method="POST" class="form-inline" role="form">
+  
+    <div class="form-group" v-for="(person, index) in persons" :key="index">
+      <label class="sr-only" for="">name</label>
+      <input type="text" class="form-control" id="" placeholder="Input field" v-model="person.name">
+      <label class="sr-only" for="">age</label>
+      <input type="text" class="form-control" id="" placeholder="Input field" v-model="person.age">
+      <label class="sr-only" for="">更新</label>
+      <button type="button" class="form-control btn btn-sm btn-primary" @click="update(index)">更新</button>
+      <label class="sr-only" for="">刪除</label>
+      <button type="button" class="form-control btn btn-sm btn-danger" @click="del(index)">刪除</button>
+    </div>
+  
+    
+  
+    <button type="button" class="btn btn-primary" @click="formSubmit">Submit</button>
+  </form>
+  
+
+  <h2>測試: v-for 物件</h2>
+
+
+</div>
+<link rel="stylesheet" href="./css/bootstrap-3.3.7.css">
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  let vm = new Vue({
+    el:"#demo",
+    data() {
+      return {
+        persons:[
+          {name:'frank',age:30},
+          {name:'frank1',age:30},
+          {name:'frank2',age:30},
+          {name:'frank3',age:30},
+          {name:'frank4',age:30},
+          {name:'frank5',age:30},
+          {name:'frank6',age:30},
+          {name:'frank7',age:30}
+        ]
+      }
+    },
+    methods: {
+      update(index){
+        let obj={name:'modify',age:18}
+        this.persons.splice(index,1,obj)
+      },
+      del(index){
+        alert('您確定要刪除 index='+index);
+        this.persons.splice(index,1);
+
+      },
+      insert(){
+        this.persons.push({name:'',age:''})
+      },
+      formSubmit(){
+        console.log(this.persons);
+      }
+    },
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>12_指令_自定義指令</title>
+</head>
+<body>
+
+<!--
+1. 註冊全局指令
+  Vue.directive('my-directive', function(el, binding){
+    el.innerHTML = binding.value.toupperCase()
+  })
+2. 註冊局部指令
+  directives : {
+    'my-directive' : {
+        bind (el, binding) {
+          el.innerHTML = binding.value.toupperCase()
+        }
+    }
+  }
+3. 使用指令
+  v-my-directive='xxx'
+-->
+<!--
+需求: 自定義2個指令
+  1. 功能類型於v-text, 但轉換為全大寫
+  2. 功能類型於v-text, 但轉換為全小寫
+-->
+
+<div id="test">
+  <p v-upper-text="msg"></p>
+  <p v-lower-text="msg"></p>
+</div>
+
+<div id="test2">
+  <p v-upper-text="msg"></p>
+  <p v-lower-text="msg"></p>
+</div>
+
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  // 註冊一個全局指令
+  // el: 指令所在的標籤對象
+  // binding: 包含指令相關數據的容器對象
+  Vue.directive('upper-text', function (el, binding) {
+    console.log(el, binding)
+    el.textContent = binding.value.toUpperCase()
+  })
+  new Vue({
+    el: '#test',
+    data: {
+      msg: "I Like You"
+    },
+    // 註冊局部指令
+    directives: {
+      'lower-text'(el, binding) {
+        console.log(el, binding)
+        el.textContent = binding.value.toLowerCase()
+      }
+    }
+
+  })
+
+  new Vue({
+    el: '#test2',
+    data: {
+      msg: "I Like You Too"
+    }
+  })
+</script>
+</body>
+</html>

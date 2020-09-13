@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>04_class與style綁定</title>
+  <style>
+    .classA {
+      color: red;
+    }
+    .classB {
+      background: blue;
+    }
+    .classC {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!--
+1. 理解
+  在應用界面中, 某個(些)元素的樣式是變化的
+  class/style綁定就是專門用來實現動態樣式效果的技術
+2. class綁定: :class='xxx'
+  xxx是字符串
+  xxx是對象
+  xxx是數組
+3. style綁定
+  :style="{ color: activeColor, fontSize: fontSize + 'px' }"
+  其中activeColor/fontSize是data屬性
+-->
+
+<div id="demo">
+  <h2>1. class綁定: :class='xxx'</h2>
+  <p :class="myClass">xxx是字符串</p>
+  <p :class="{classA: hasClassA, classB: hasClassB}">xxx是對象</p>
+  <p :class="['classA', 'classB']">xxx是數組</p>
+
+  <h2>2. style綁定</h2>
+  <p :style="{color:activeColor, fontSize}">:style="{ color: activeColor, fontSize: fontSize + 'px' }"</p>
+
+  <button @click="update">更新</button>
+
+</div>
+
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data: {
+      myClass: 'classA',
+      hasClassA: true,
+      hasClassB: false,
+      activeColor: 'red',
+      fontSize: '20px'
+    },
+
+    methods: {
+      update () {
+        this.myClass = 'classB'
+        this.hasClassA = !this.hasClassA
+        this.hasClassB = !this.hasClassB
+        this.activeColor = 'yellow'
+        this.fontSize = '30px'
+      }
+    }
+  })
+</script>
+</body>
+</html>

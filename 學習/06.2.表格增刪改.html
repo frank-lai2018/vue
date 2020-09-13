@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>06_列表渲染</title>
+</head>
+<body>
+
+<!--
+1. 列表顯示
+  陣列: v-for / index
+  物件: v-for / key
+2. 列表的更新顯示
+  刪除item
+  替換item
+-->
+
+<div id="demo">
+  <h2>測試: v-for 陣列</h2>
+  
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>age</th>
+        <th>other</th>
+      </tr>
+    </thead>
+    <tbody>
+      <button type="button" class="btn btn-sm btn-success" @click="insert">新增</button>
+      <tr v-for="(person, index) in persons" :key="index">
+        <td>{{person.name}}</td>
+        <td>{{person.age}}</td>
+        <td>
+        <button type="button" class="btn btn-sm btn-primary" @click="update(index)">更新</button>
+        <button type="button" class="btn btn-sm btn-danger" @click="del(index)">刪除</button>
+        
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>測試: v-for 物件</h2>
+
+
+</div>
+<link rel="stylesheet" href="./css/bootstrap-3.3.7.css">
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  let vm = new Vue({
+    el:"#demo",
+    data() {
+      return {
+        persons:[
+          {name:'frank',age:30},
+          {name:'frank1',age:30},
+          {name:'frank2',age:30},
+          {name:'frank3',age:30},
+          {name:'frank4',age:30},
+          {name:'frank5',age:30},
+          {name:'frank6',age:30},
+          {name:'frank7',age:30}
+        ]
+      }
+    },
+    methods: {
+      update(index){
+        let obj={name:'modify',age:18}
+        this.persons.splice(index,1,obj)
+      },
+      del(index){
+        alert('您確定要刪除 index='+index);
+        this.persons.splice(index,1);
+
+      },
+      insert(){
+        this.persons.push({name:'',age:''})
+      }
+    },
+  })
+</script>
+</body>
+</html>

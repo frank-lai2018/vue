@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>07_事件處理</title>
+</head>
+<body>
+<!--
+1. 綁定監聽:
+  v-on:xxx="fun"
+  @xxx="fun"
+  @xxx="fun(參數)"
+  默認事件型參: event
+  隱含屬性物件: $event
+2. 事件修飾符:
+  .prevent : 阻止事件的默認行為 event.preventDefault()
+  .stop : 停止事件冒泡 event.stopPropagation()
+3. 按鍵修飾符
+  .keycode : 操作的是某個keycode值得鍵
+  .enter : 操作的是enter鍵
+-->
+
+<div id="example">
+
+  <h2>1. 綁定監聽</h2>
+  <button @click="test1">test1</button>
+  <button @click="test2('abc')">test2</button>
+  <button @click="test3('abcd', $event)">test3</button>
+
+  <h2>2. 事件修飾符</h2>
+  <a href="http://www.baidu.com" @click.prevent="test4">百度一下</a>
+  <div style="width: 200px;height: 200px;background: red" @click="test5">
+    <div style="width: 100px;height: 100px;background: blue" @click.stop="test6"></div>
+  </div>
+
+  <h2>3. 按鍵修飾符</h2>
+  <input type="text" @keyup.13="test7">
+  <input type="text" @keyup.enter="test7">
+
+</div>
+
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#example',
+    data: {
+
+    },
+    methods: {
+      test1(event) {
+        alert(event.target.innerHTML)
+      },
+      test2 (msg) {
+        alert(msg)
+      },
+      test3 (msg, event) {
+        alert(msg+'---'+event.target.textContent)
+      },
+
+      test4 () {
+        alert('點擊了按鈕')
+      },
+
+      test5 () {
+        alert('out')
+      },
+      test6 () {
+        alert('inner')
+      },
+
+      test7 (event) {
+        console.log(event.keyCode)
+        alert(event.target.value)
+      }
+    }
+  })
+</script>
+</body>
+</html>

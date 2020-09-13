@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>12_指令_內置指令</title>
+  <style>
+    [v-cloak] { display: none }
+  </style>
+</head>
+<body>
+<!--
+常用內置指令
+  v:text : 更新元素的 textContent
+  v-html : 更新元素的 innerHTML
+  v-if : 如果為true, 當前標籤才會輸出到頁面
+  v-else: 如果為false, 當前標籤才會輸出到頁面
+  v-show : 通過控制display樣式來控制顯示/隱藏
+  v-for : 遍歷數組/對象
+  v-on : 綁定事件監聽, 一般簡寫為@
+  v-bind : 強制綁定解析表達式, 可以省略v-bind
+  v-model : 雙向數據綁定
+  ref : 為某個元素註冊一個唯一標識, vue對象通過$refs屬性訪問這個元素對象
+  v-cloak : 使用它防止閃現表達式, 與css配合: [v-cloak] { display: none }
+-->
+<div id="example">
+  <p v-cloak>{{content}}</p>
+  <p v-text="content"></p> <!--p.textContent = content-->
+  <p v-html="content"></p> <!--p.innerHTML = content-->
+  <p ref="msg">abcd</p>
+  <button @click="hint">提示</button>
+</div>
+
+<script type="text/javascript" src="./js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#example',
+    data: {
+      content: '<a href="http://www.baidu.com">百度一下</a>'
+    },
+    methods: {
+      hint () {
+        alert(this.$refs.msg.innerHTML)
+      }
+    }
+  })
+</script>
+</body>
+</html>
