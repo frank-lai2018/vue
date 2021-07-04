@@ -26,7 +26,13 @@
     <label for="foot">足球</label>
     <input type="checkbox" id="pingpang" value="pingpang" v-model="likes">
     <label for="pingpang">乒乓</label><br>
-
+    <br>
+    <span>第2種checkbox 數據綁定方式</span>
+    <p v-for="(checkboxItem,index) in checkboxListType2" :key='index'>
+      <input type="checkbox" :id="index" :value="checkboxItem.name" v-model="checkboxItem.checked">
+      <label :for="index">{{checkboxItem.name}}</label>
+    </p>
+<br>
     <span>城市: </span>
     <select v-model="cityId">
       <option value="">未選擇</option>
@@ -38,27 +44,30 @@
     <input type="submit" value="註冊">
   </form>
 </div>
-
 <link rel="stylesheet" href="../css/bootstrap-3.3.7.css">
-<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="./js/vue.js"></script>
 <script type="text/javascript">
-  new Vue({
-    el: '#demo',
-    data: {
-      username: '',
-      pwd: '',
-      sex: '男',
-      likes: ['foot'],
-      allCitys: [{id: 1, name: 'BJ'}, {id: 2, name: 'SS'}, {id: 3, name: 'SZ'}],
-      cityId: '2',
-      info: ''
-    },
-    methods: {
+  let vm = new Vue({
+     el:"#demo",
+     data() {
+       return {
+        username: '',
+        pwd: '',
+        sex: '男',
+        likes: ['foot'],
+        allCitys: [{id: 1, name: 'BJ'}, {id: 2, name: 'SS'}, {id: 3, name: 'SZ'}],
+        checkboxListType2:[{name:'amy',checked:false},{name:'peggy',checked:false},{name:'jenny',checked:false}],
+        cityId: '2',
+        info: ''
+       }
+     },
+     methods: {
       handleSubmit () {
+        console.log(this.checkboxListType2)
         console.log(this.username, this.pwd, this.sex, this.likes, this.cityId, this.info)
       }
-    }
-  })
-</script>
+     }
+   })
+ </script>
 </body>
 </html>
