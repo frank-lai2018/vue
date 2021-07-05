@@ -10,7 +10,8 @@
   功能: 對要顯示的數據進行特定格式化後再顯示
   注意: 並沒有改變原本的數據, 可是產生新的對應的數據
 2. 編碼
-  1). 定義過濾器
+  1). 定義過濾器(value: | 前面的變數值，arg1,arg2...為()傳入的參數)
+    
     Vue.filter(filterName, function(value[,arg1,arg2,...]){
       // 進行一定的數據處理
       return newValue
